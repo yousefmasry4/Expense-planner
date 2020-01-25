@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
+import '../models/functions.dart';
 import '../models/transaction.dart';
 
 class TransactionList extends StatelessWidget {
@@ -8,13 +8,13 @@ class TransactionList extends StatelessWidget {
 
   TransactionList(this.transactions);
 
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 500,
-      child: ListView.builder(
-        itemBuilder: (ctx, index) {
-          return Card(
+    return Column(
+      children:
+         transactions.map((d){
+         return Card(
             child: Row(
               children: <Widget>[
                 Container(
@@ -24,17 +24,17 @@ class TransactionList extends StatelessWidget {
                   ),
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: Colors.purple,
+                      color: Colors.green,
                       width: 2,
                     ),
                   ),
                   padding: EdgeInsets.all(10),
                   child: Text(
-                    '\$${transactions[index].amount}',
+                    '\$${funcs.amounting(d.amount)}',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
-                      color: Colors.purple,
+                      color: Colors.green,
                     ),
                   ),
                 ),
@@ -42,14 +42,11 @@ class TransactionList extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      transactions[index].title,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      d.title,
+                      style: Theme.of(context).textTheme.title
                     ),
                     Text(
-                      DateFormat.yMMMd().format(transactions[index].date),
+                      DateFormat.yMMMd().format(d.date),
                       style: TextStyle(
                         color: Colors.grey,
                       ),
@@ -59,9 +56,9 @@ class TransactionList extends StatelessWidget {
               ],
             ),
           );
-        },
-        itemCount: transactions.length,
-      ),
+        }).toList(),
+
+
     );
   }
 }
