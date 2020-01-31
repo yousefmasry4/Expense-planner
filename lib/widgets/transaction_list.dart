@@ -5,8 +5,8 @@ import '../models/transaction.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
-
-  TransactionList(this.transactions);
+  final Function del;
+  TransactionList(this.transactions,this.del);
 
 
   @override
@@ -17,6 +17,7 @@ class TransactionList extends StatelessWidget {
          return Card(
             child: Row(
               children: <Widget>[
+
                 Container(
                   margin: EdgeInsets.symmetric(
                     vertical: 10,
@@ -38,7 +39,8 @@ class TransactionList extends StatelessWidget {
                     ),
                   ),
                 ),
-                Column(
+                Expanded(
+                child:Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
@@ -53,7 +55,15 @@ class TransactionList extends StatelessWidget {
                     ),
                   ],
                 ),
-              ],
+                ),
+           IconButton(
+           icon: Icon(
+           Icons.delete,
+           color: Colors.red,
+           ),
+             onPressed: ()=>del(d),
+           )
+           ],
             ),
           );
         }).toList(),

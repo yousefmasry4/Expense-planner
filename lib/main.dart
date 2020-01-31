@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import 'package:untitled/widgets/ChartFile.dart';
 import 'package:untitled/widgets/new_transaction.dart';
 import 'package:untitled/widgets/transaction_list.dart';
-
 import 'models/transaction.dart';
 
 void main() => runApp(MyApp());
@@ -89,11 +88,20 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void _addNewTransaction(String txTitle, double txAmount) {
+
+  void del(id){
+    print("hi list is ${_userTransactions.length}");
+
+    setState(() {
+      _userTransactions.remove(id);
+    });
+  }
+
+  void _addNewTransaction(String txTitle, double txAmount, x) {
     final newTx = Transaction(
       title: txTitle,
       amount: txAmount,
-      date: DateTime.now(),
+      date: x,
       id: DateTime.now().toString(),
     );
 
@@ -161,7 +169,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 )
              ],
             )
-            :TransactionList(_userTransactions),
+            :TransactionList(_userTransactions,del),
           ],
         ),
       ),

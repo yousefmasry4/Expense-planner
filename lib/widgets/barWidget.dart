@@ -34,7 +34,7 @@ class bar extends StatelessWidget{
           ),
         ),
         Text(day),
-        Text("${funcs.amounting(amount)}\$"),
+        Text("${funcs.amounting(amount)}"),
         SizedBox(
           height: 3,
           width: 70,
